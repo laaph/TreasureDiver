@@ -1,6 +1,3 @@
-//Code by Jacek Wieczorek
-
-// Edited by Jethro to make work
 
 #include <stdio.h>
 #include <stdlib.h>
