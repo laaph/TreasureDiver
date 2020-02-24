@@ -33,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		678A48C7240303C00074CE12 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		67FF0077240121CC001D6C12 /* TreasureDiver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TreasureDiver; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FF007A240121CC001D6C12 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		67FF0081240121D8001D6C12 /* libBearLibTerminal.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libBearLibTerminal.dylib; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 				67FF008E24015C16001D6C12 /* player_data.h */,
 				67FF00852401271F001D6C12 /* water_scene.h */,
 				67FF00862401271F001D6C12 /* water_scene.c */,
+				678A48C7240303C00074CE12 /* README.md */,
 			);
 			path = TreasureDiver;
 			sourceTree = "<group>";
@@ -289,6 +291,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TreasureDiver",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -302,6 +305,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TreasureDiver",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

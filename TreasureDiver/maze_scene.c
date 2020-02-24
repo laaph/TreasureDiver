@@ -160,10 +160,15 @@ void maze_scene(int level) {
             while(1){
                 int key2 = terminal_read();
                 if(key2 == TK_N || key2 == TK_ESCAPE) {
+                    // I don't bother to free memory, on most machines this is
+                    // perfectly okay. I don't know any that it isn't.
                     terminal_close();
                     exit(0);
                 }
                 if(key2 == TK_Y || key2 == TK_RETURN){
+                    for(int i = 0; i < player_max_level; i++) {
+                        free(player_maze_nodes[i]);
+                    }
                     main_setup();
                 }
             }
@@ -306,12 +311,19 @@ int snake_move(int snake_id, int start_x, int start_y, int dest_x, int dest_y, i
     if(dest_x == player_x && dest_y == player_y){
         player_air = player_air - 2;
         player_wounded = 1;
+        
+        // The x+1 and x-1 should have bounds checking :(
+        // We never get to the y edge of the screen, so that should be okay.
         nodes[dest_x + dest_y * width].color = 0xFFFF0000;
         nodes[dest_x +1 + dest_y * width].color = 0xFFFF0000;
-        nodes[dest_x + dest_y +1 * width].color = 0xFFFF0000;
+        if(dest_y < height) {
+            nodes[dest_x + ((dest_y + 1) * width)].color = 0xFFFF0000;
+        }
         nodes[dest_x -1 + dest_y * width].color = 0xFFFF0000;
-        nodes[dest_x + dest_y - 1* width].color = 0xFFFF0000;
-
+        if(dest_y > 0) {
+            nodes[dest_x + ((dest_y - 1) * width)].color = 0xFFFF0000;
+        }
+        
         nodes[start_x + start_y * width].c = maze_empty;
 
         // if snake_id == snake_num - 1, then we overwrite ourselves and nothing happens.
