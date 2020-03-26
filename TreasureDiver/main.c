@@ -26,10 +26,8 @@ int main(int argc, const char * argv[]) {
     char path[1024];
     uint32_t size = sizeof(path);
     if (_NSGetExecutablePath(path, &size) == 0) {
-//        fprintf(stderr, "executable path is %s\n", path);
         char *lastsep = strrchr(path, '/');
         path[strlen(path) - strlen(lastsep)] = '\0';
-//        fprintf(stderr, "%s\n", path);
         
         char options1[1024] = "window.size=39x25; font:";
         char options2[] = "/Symbola613.ttf, size=18; window.title='Treasure Diver'";
@@ -39,12 +37,6 @@ int main(int argc, const char * argv[]) {
 
         strcat(options1, path);
         strcat(options1, options2);
-
-//        strcat(path, options1);
-//        strcat(options2, options1);
-//        options = strcat(strcat("window.size=39x25; font:", path), "Symbola613.ttf, size=24; window.title='Treasure Diver'");
-
-//        fprintf(stderr, "%s", options1);
 
         terminal_open();
         terminal_set(options1);
