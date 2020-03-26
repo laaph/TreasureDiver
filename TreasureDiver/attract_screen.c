@@ -67,19 +67,20 @@ void main_setup(void){
     if(!DEBUG){
         attract_screen();
         water_scene();
-    }
+    } else {
 
-    terminal_wprint(1, 2, L"Test symbols: 💰-💲 $ 😃  🐍");
-    terminal_wprint(1, 3, L"Test symbols: █████████");
-    terminal_wprint(1, 4, L"Test symbols: 🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫");
-    terminal_wprint(1, 5, L"Test symbols: abcdefghijklm");
+        terminal_wprint(1, 2, L"Test symbols: 💰-💲 $ 😃  🐍");
+        terminal_wprint(1, 3, L"Test symbols: █████████");
+        terminal_wprint(1, 4, L"Test symbols: 🀫🀫🀫🀫🀫🀫🀫🀫🀫🀫");
+        terminal_wprint(1, 5, L"Test symbols: abcdefghijklm");
 
-    terminal_refresh();
-    while(1){
-        int key = terminal_read();
-        if(key == TK_ESCAPE || key == TK_Q || key == TK_CLOSE){
-            terminal_close();
-            exit(0);
+        terminal_refresh();
+        while(1){
+            int key = terminal_read();
+            if(key == TK_ESCAPE || key == TK_Q || key == TK_CLOSE){
+                terminal_close();
+                exit(0);
+            }
         }
     }
 }
