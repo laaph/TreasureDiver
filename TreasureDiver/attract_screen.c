@@ -18,7 +18,7 @@ void attract_screen(void){
 
     terminal_clear();
 
-    terminal_wprint( 0,  1, L"Welcome To Treasure Diver v1.01!");
+    terminal_wprint( 0,  1, L"Welcome To Treasure Diver v1.1!");
     terminal_wprint( 0,  3, L"Starring [color=yellow]🙂[/color] and [color=yellow]😷[/color] as the player!");
     terminal_wprint(25,  4, L"(that's you!)");
     terminal_wprint( 0,  6, L"Starring 💰 as the things you collect!");
