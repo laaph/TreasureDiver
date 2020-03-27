@@ -31,9 +31,6 @@ int main(int argc, const char * argv[]) {
         
         char options1[1024] = "window.size=39x25; font:";
         char options2[] = "/Symbola613.ttf, size=18; window.title='Treasure Diver'";
-        
-        // WTF is up with strcat syntax, I know there are oddities in C but who has so
-        // much hatred to design strcat that way?
 
         strcat(options1, path);
         strcat(options1, options2);
