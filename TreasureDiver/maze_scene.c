@@ -18,11 +18,14 @@
 #include "attract_screen.h"
 
 int calculate_player_move_time() {
-    player_speed = player_max_speed - player_collected_money;
+    player_speed = player_max_speed - (player_collected_money/3);
     if(player_wounded){
-        player_speed = player_speed - 10;
+        player_speed = player_speed - 5;
     }
-    return 100 - (player_speed * 3);
+    return 15 - player_speed;
+}
+int calculate_snake_move_time(int l) {
+    return 15 - l;
 }
 
 void maze_scene(int level) {
@@ -137,7 +140,7 @@ void maze_scene(int level) {
     int air_counter = 0;
     int dir = 0;
     int player_move_time = calculate_player_move_time();
-    int snake_move_time = 100 - (level * 3); // snake speed is equal to the level;
+    int snake_move_time = calculate_snake_move_time(level);
 
     while(1){
         clock_t loop_began = clock();
@@ -183,7 +186,7 @@ void maze_scene(int level) {
         player_move_time--;
         snake_move_time--;
         
-        if(air_counter > 1000){
+        if(air_counter > 100){ // was 1000, so 1000/60 ~ 16. That didn't work at all, will have to guess. 
             player_air = player_air-1;
             air_counter = 0;
 //            fprintf(stderr, "air %i, money %i \n", player_air, player_collected_money);
@@ -253,7 +256,7 @@ void maze_scene(int level) {
                 
             }
             // for each snake
-            snake_move_time = 100 - (level * 3);
+            snake_move_time = calculate_snake_move_time(level);
         }
         if(player_move_time < 1) {
             if(dir == TK_LEFT) {

@@ -108,8 +108,13 @@ void water_scene(void) {
             }
         }
         
+        // We aren't changing this at the moment since it does not matter how fast the waves
+        // go.
+        
+        // But it does still affect movement.  🤔
         nanosleep((const struct timespec[]){{0, 100L}}, NULL);
-    move_time--;
+        
+        move_time--;
         if(move_time < 1){
             if(dir == TK_RIGHT) {
                 terminal_wprint(player_x, player_y, L" "); // delete the player
@@ -123,9 +128,16 @@ void water_scene(void) {
                 player_x--;
                 if(player_x == water_x){
                     while(player_y <= 24){
+                        clock_t loop_began = clock();
+                        
                         terminal_wprint(player_x, player_y, L"[color=yellow]🙂");
                         terminal_refresh();
-                        nanosleep((const struct timespec[]){{0, 50000000L}}, NULL);
+                        
+                        // loop management goes here
+                        while(clock() - loop_began < (CLOCKS_PER_SEC / 60)) {
+                            nanosleep((const struct timespec[]){{0, 100L}}, NULL);
+                        }
+                        
                         terminal_wprint(player_x, player_y, L" ");
                         player_y++;
                         terminal_refresh();
