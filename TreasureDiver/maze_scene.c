@@ -17,6 +17,14 @@
 #include "water_scene.h"
 #include "attract_screen.h"
 
+int calculate_player_move_time() {
+    player_speed = player_max_speed - player_collected_money;
+    if(player_wounded){
+        player_speed = player_speed - 10;
+    }
+    return 100 - (player_speed * 3);
+}
+
 void maze_scene(int level) {
     player_level = level;
     
@@ -128,14 +136,11 @@ void maze_scene(int level) {
     
     int air_counter = 0;
     int dir = 0;
-    player_speed = player_max_speed - player_collected_money;
-    if(player_wounded){
-        player_speed = player_speed - 10;
-    }
-    int player_move_time = 100 - (player_speed * 3);
+    int player_move_time = calculate_player_move_time();
     int snake_move_time = 100 - (level * 3); // snake speed is equal to the level;
 
     while(1){
+        clock_t loop_began = clock();
         terminal_clear();
         draw_maze();
         terminal_refresh();
@@ -277,13 +282,11 @@ void maze_scene(int level) {
                 }
                 move_player(player_x, player_y + 1);
             }
-            player_speed = player_max_speed - player_collected_money;
-            if(player_wounded){
-                player_speed = player_speed - 10;
-            }
-            player_move_time = 100 - (player_speed * 3);
+            player_move_time = calculate_player_move_time();
         }
-        nanosleep((const struct timespec[]){{0, 100L}}, NULL);
+        while(clock() - loop_began < (CLOCKS_PER_SEC / 60)) {
+            nanosleep((const struct timespec[]){{0, 100L}}, NULL);
+        }
     }
 }
 // We will change player_x and player_y as needed
